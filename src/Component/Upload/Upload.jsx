@@ -13,9 +13,10 @@ const Upload = () => {
 // }
 
 // onSubmit form handling
-const [show,setShow] = useState(false)
-const [error,setError] = useState('')
 
+const [error,setError] = useState('')
+const [sucs,setSuc] = useState('')
+const [showPassword,setShowpassword] = useState(false)
 const onSubmithandling = (e) => {
     e.preventDefault()
   const email = e.target.email.value
@@ -27,9 +28,12 @@ const onSubmithandling = (e) => {
   }
   else{
     setError('')
+    setSuc('login Success Fully')
   }
+
+  
   e.target.reset()
-  console.log(email,pass)
+ 
 }
 
 
@@ -53,12 +57,14 @@ const onSubmithandling = (e) => {
                   >Password</label>
                   <input
                     name="password"
-                    type={show? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     className="input"
                     placeholder="Password"
                   />
-                  <span  onClick={() => setShow(!show)} className="absolute top-6 right-1.5">
-                    {show? <EyeOff /> : <Eye/>}
+                  <span onClick={() => setShowpassword(!showPassword)} className="absolute top-6 right-1.5">
+                   {
+                    showPassword? <EyeOff /> : <Eye></Eye>
+                   }
                   </span>
                  </div>
                   <p className="text-red-500">{error}</p>
@@ -66,6 +72,7 @@ const onSubmithandling = (e) => {
                     <a className="link link-hover">Forgot password?</a>
                   </div>
                   <button className="btn btn-neutral mt-4">Login</button>
+                  <p>{sucs}</p>
                 </fieldset>
               </div>
             </div>
