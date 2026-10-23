@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
+import { Eye,EyeOff } from "lucide-react";
 
 const Upload = () => {
 
@@ -12,6 +13,8 @@ const Upload = () => {
 // }
 
 // onSubmit form handling
+const [show,setShow] = useState(false)
+const [error,setError] = useState('')
 
 const onSubmithandling = (e) => {
     e.preventDefault()
@@ -19,11 +22,17 @@ const onSubmithandling = (e) => {
   const pass= e.target.password.value
 
   if(pass.length < 6){
-     alert('Please input your name')
+     setError('Please input your Password')
      return
   }
+  else{
+    setError('')
+  }
+  e.target.reset()
   console.log(email,pass)
 }
+
+
 
   return (
     <div>
@@ -38,14 +47,21 @@ const onSubmithandling = (e) => {
                 <fieldset className="fieldset">
                   <label className="label">Email</label>
                   <input name="email" type="email" className="input" placeholder="Email" />
-                  <label className="label" 
+
+                 <div className="relative">
+                     <label className="label" 
                   >Password</label>
                   <input
                     name="password"
-                    type="password"
+                    type={show? 'text' : 'password'}
                     className="input"
                     placeholder="Password"
                   />
+                  <span  onClick={() => setShow(!show)} className="absolute top-6 right-1.5">
+                    {show? <EyeOff /> : <Eye/>}
+                  </span>
+                 </div>
+                  <p className="text-red-500">{error}</p>
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
