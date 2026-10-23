@@ -11,13 +11,25 @@ const Upload = () => {
 //    console.log(email,password)
 // }
 
+// onSubmit form handling
 
+const onSubmithandling = (e) => {
+    e.preventDefault()
+  const email = e.target.email.value
+  const pass= e.target.password.value
+
+  if(pass.length < 6){
+     alert('Please input your name')
+     return
+  }
+  console.log(email,pass)
+}
 
   return (
     <div>
       <h1>Hello Upload</h1>
 
-      <form>
+      <form onSubmit={onSubmithandling}>
         <div className="hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row-reverse">
         
@@ -25,11 +37,11 @@ const Upload = () => {
               <div className="card-body">
                 <fieldset className="fieldset">
                   <label className="label">Email</label>
-                  <input ref={emailRef} type="email" className="input" placeholder="Email" />
+                  <input name="email" type="email" className="input" placeholder="Email" />
                   <label className="label" 
                   >Password</label>
                   <input
-                  ref={passRef}
+                    name="password"
                     type="password"
                     className="input"
                     placeholder="Password"
